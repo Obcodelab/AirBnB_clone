@@ -11,10 +11,21 @@ class BaseModel:
         attributes/methods for other classes
     """
 
-    def __init__(self):
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+    def __init__(self, *args, **kwargs):
+        """ class constructor """
+
+        if kwargs:
+            for attr in kwargs:
+                if attr == "created_at" or attr == "updated_at":
+                    dtf = "%Y-%m-%dT%H:%M:%S.%f"
+                    val = datetime.strptime(kwargs[attr], dtf)
+                    kwargs[attr] = val
+                if attr != "__class__":
+                    setattr(self, attr, kwargs[attr])
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """ print: [<class name>] (<self.id>) <self.__dict__>"""
