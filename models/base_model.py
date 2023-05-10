@@ -12,7 +12,11 @@ class BaseModel:
     """
 
     def __init__(self, *args, **kwargs):
-        """ class constructor """
+        """ class constructor
+            re-creates an instance from a dictionary representation,
+            else creates a new instance.
+            The unique id should be converted to a string.
+        """
 
         if kwargs:
             for attr in kwargs:
