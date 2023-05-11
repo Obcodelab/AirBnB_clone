@@ -40,8 +40,96 @@ class HBNBCommand(cmd.Cmd):
         elif arg not in HBNBCommand.clss:
             print("** class doesn't exist **")
         else:
-            print(eval(arg)().id)
-            storage.save()
+            inst = eval(arg)()
+            print(inst.id)
+            inst.save()
+
+    def do_show(self, arg):
+        """ Prints the string representation of an instance
+            based on the class name and id
+        """
+
+        line = arg.split(' ')
+        ob_dict = storage.all()
+        if not arg:
+            print("** class name missing **")
+        elif line[0] not in HBNBCommand.clss:
+            print("** class doesn't exist **")
+        elif len(line) == 1:
+            print("** instance id missing **")
+        else:
+            inst = f"{line[0]}.{line[1]}"
+            if inst not in ob_dict:
+                print("** no instance found **")
+            else:
+                obj = ob_dict[inst]
+                print(obj)
+
+    def do_destroy(self, arg):
+        """ Deletes an instance based on the class name and id
+            (save the change into the JSON file)
+        """
+
+        line = arg.split(' ')
+        obj_dict = storage.all()
+        if not arg:
+            print("** class name missing **")
+        elif line[0] not in HBNBCommand.clss:
+            print("** class doesn't exist **")
+        elif len(line) == 1:
+            print("** instance id missing **")
+        else:
+            for key in obj_dict:
+                inst = f"{line[0]}.{line[1]}"
+                if inst != key:
+                    print("** no instance found **")
+                else:
+                    del obj_dict[inst]
+                    storage.save()
+                    return
+
+    def do_all(self, arg):
+        """ Prints all string representation of all instances
+            based or not on the class name.
+            The printed result must be a list of strings
+        """
+
+        list_obj = []
+        all_obj = storage.all()
+
+        if not arg:
+            for key in all_obj:
+                obj = all_obj[key]
+                list_obj.append(obj.__str__())
+            print(list_obj)
+        elif arg not in HBNBCommand.clss:
+            print("** class doesn't exist **")
+        else:
+            for key, value in all_obj.items():
+                if arg == value.__class__.__name__:
+                    ob = all_obj[key]
+                    list_obj.append(ob.__str__())
+            print(list_obj)
+
+    def default(self, arg):
+        """ Method called on an input line when the command prefix
+            is not recognized.
+            Retrieve all instances of a class by using: <class name>.all()
+            Retrieve the number of instances of a class: <class name>.count()
+        """
+
+        obj = storage.all()
+        line = arg.split('.')
+        count = 0
+
+        if line[1] == 'all()':
+            self.do_all(line[0])
+        elif line[1] == 'count()':
+            for i in obj:
+                key = i.split('.')
+                if key[0] == line[0]:
+                    count += 1
+            print(count)
 
 
 if __name__ == '__main__':
