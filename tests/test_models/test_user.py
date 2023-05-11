@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Testing ther User class """
+""" Testing the User class """
 import unittest
 from models.base_model import BaseModel
 from models.user import User
@@ -7,6 +7,12 @@ from models.user import User
 
 class TestUser(unittest.TestCase):
     """Test cases for User class."""
+
+    def test_instance(self):
+        """ Testing instance of User class """
+
+        user = User()
+        self.assertIsInstance(user, User)
 
     def test_attr(self):
         """Testing the attributes of User class """
@@ -35,8 +41,8 @@ class TestUser(unittest.TestCase):
         """Testing the  __str__ method of User class """
 
         user2 = User()
-
-        self.assertIsInstance(str(user2), str)
+        string = user2.__str__()
+        self.assertIsInstance(string, str)
 
     def test_save(self):
         """ Testing save method of User """
