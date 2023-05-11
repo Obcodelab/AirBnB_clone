@@ -46,7 +46,8 @@ class TestBaseModel(unittest.TestCase):
         """ Testing the  __str__ method of BaseModel """
 
         bm3 = BaseModel()
-        self.assertIsInstance(str(bm3), str)
+        string = bm3.__str__()
+        self.assertIsInstance(string, str)
 
     def test_save(self):
         """ Testing save method of BaseModel """
