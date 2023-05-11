@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Testing ther State class """
+""" Testing the State class """
 import unittest
 from models.base_model import BaseModel
 from models.state import State
@@ -7,6 +7,12 @@ from models.state import State
 
 class TestState(unittest.TestCase):
     """Test cases for State class """
+
+    def test_instance(self):
+        """ Testing instance of State class """
+
+        state = State()
+        self.assertIsInstance(state, State)
 
     def test_attr(self):
         """Testing the attributes of State class """
@@ -28,7 +34,8 @@ class TestState(unittest.TestCase):
         """Testing  __str__ method of State class """
 
         state2 = State()
-        self.assertIsInstance(str(state2), str)
+        string = state2.__str__()
+        self.assertIsInstance(string, str)
 
     def test_save(self):
         """ Testing save method of State class """
