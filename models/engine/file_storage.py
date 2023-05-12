@@ -25,7 +25,8 @@ class FileStorage:
         """Serializes __objects to JSON file."""
         with open(FileStorage.__file_path, "w", encoding="utf-8") as file:
             data = {
-                key: values.to_dict() for key, values in FileStorage.__objects.items()
+                key: values.to_dict()
+                for key, values in FileStorage.__objects.items()
             }
             json.dump(data, file)
 
