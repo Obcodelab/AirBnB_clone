@@ -148,7 +148,7 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
             else:
                 att_type = type(getattr(obj, att_name))
-                cast_value = att_type(att_value)
+                c_value = att_type(att_value)
                 setattr(obj, att_name, c_value)
                 obj.save()
             return
