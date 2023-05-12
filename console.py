@@ -20,6 +20,7 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, arg):
         """exits the program"""
 
+        print()
         return True
 
     def do_quit(self, arg):
@@ -79,14 +80,12 @@ class HBNBCommand(cmd.Cmd):
         elif len(line) == 1:
             print("** instance id missing **")
         else:
-            for key in obj_dict:
-                inst = f"{line[0]}.{line[1]}"
-                if inst != key:
-                    print("** no instance found **")
-                else:
-                    del obj_dict[inst]
-                    storage.save()
-                    return
+            inst = f"{line[0]}.{line[1]}"
+            if inst not in obj_dict:
+                print("** no instance found **")
+            else:
+                del obj_dict[inst]
+                storage.save()
 
     def do_all(self, arg):
         """ Prints all string representation of all instances
@@ -110,6 +109,49 @@ class HBNBCommand(cmd.Cmd):
                     ob = all_obj[key]
                     list_obj.append(ob.__str__())
             print(list_obj)
+
+    def do_update(self, arg):
+        """ Updates an instance based on the class name and id
+            by adding or updating attribute
+            (save the change into the JSON file)
+        """
+
+        line = arg.split(' ')
+        if not arg:
+            print("** class name missing **")
+            return
+        elif line[0] not in HBNBCommand.clss:
+            print("** class doesn't exist **")
+            return
+        elif len(line) == 1:
+            print("** instance id missing **")
+            return
+
+        inst = f"{line[0]}.{line[1]}"
+        objt_dict = storage.all()
+        if inst not in objt_dict:
+            print("** no instance found **")
+            return
+
+        if len(line) == 2:
+            print("** attribute name missing **")
+            return
+        elif len(line) == 3:
+            print("** value missing **")
+            return
+        elif len(line) == 4:
+            obj = objt_dict[inst]
+            att_name = line[2]
+            att_value = line[3]
+            if att_name not in ["updated_at", "created_at", "id"]:
+                setattr(obj, att_name, att_value)
+                storage.save()
+            else:
+                att_type = type(getattr(obj, att_name))
+                cast_value = att_type(att_value)
+                setattr(obj, att_name, c_value)
+                obj.save()
+            return
 
     def default(self, arg):
         """ Method called on an input line when the command prefix
