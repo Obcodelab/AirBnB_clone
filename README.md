@@ -4,7 +4,7 @@
 
 ### Description
 
-* **This is the first phase of the Airbnb Clone: the console. This repository holds a command interpreter and classes (i.e. BaseModel class and several other classes that inherit from it: User, Amenity, City, State, Place, Review), and a storage engine. The command interpreter, is like Shell, but limited to a specific use-case. It takes in user input, and manipulates the object instances**:
+**This is the first phase of the Airbnb Clone: the console. This repository holds a command interpreter and classes (i.e. BaseModel class and several other classes that inherit from it: User, Amenity, City, State, Place, Review), and a storage engine. The command interpreter, is like Shell, but limited to a specific use-case. It takes in user input, and manipulates the object instances**:
 
 * ***Create a new object (ex: a new User or a new Place)***
 * ***Retrieve an object from a file***
