@@ -2,20 +2,22 @@
 """ class BaseModel that defines all common
     attributes/methods for other classes
 """
-from datetime import datetime
 import uuid
+from datetime import datetime
+
+from models import storage
 
 
 class BaseModel:
-    """ class BaseModel that defines all common
-        attributes/methods for other classes
+    """class BaseModel that defines all common
+    attributes/methods for other classes
     """
 
     def __init__(self, *args, **kwargs):
-        """ class constructor
-            re-creates an instance from a dictionary representation,
-            else creates a new instance.
-            The unique id should be converted to a string.
+        """class constructor
+        re-creates an instance from a dictionary representation,
+        else creates a new instance.
+        The unique id should be converted to a string.
         """
 
         if kwargs:
@@ -30,27 +32,28 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
-        """ print: [<class name>] (<self.id>) <self.__dict__>"""
+        """print: [<class name>] (<self.id>) <self.__dict__>"""
 
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """updates the public instance attribute
-            updated_at with the current datetime
+        updated_at with the current datetime
         """
 
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
-        """ returns a dictionary containing all keys/values of __dict__
-            of an instance. A key __class__ must be added to this dictionary
-            with the class name of the object. created_at and updated_at must
-            be converted to string object in ISO format
+        """returns a dictionary containing all keys/values of __dict__
+        of an instance. A key __class__ must be added to this dictionary
+        with the class name of the object. created_at and updated_at must
+        be converted to string object in ISO format
         """
-        a_dict = {}
-        a_dict = self.__dict__
+        a_dict = self.__dict__.copy()
         a_dict["__class__"] = self.__class__.__name__
         a_dict["created_at"] = self.created_at.isoformat()
         a_dict["updated_at"] = self.updated_at.isoformat()
