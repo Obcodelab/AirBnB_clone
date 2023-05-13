@@ -143,14 +143,14 @@ class HBNBCommand(cmd.Cmd):
             obj = objt_dict[inst]
             att_name = line[2]
             att_value = line[3]
-            if att_name not in ["updated_at", "created_at", "id"]:
-                setattr(obj, att_name, att_value)
-                storage.save()
-            else:
+            if hasattr(obj, att_name):
                 att_type = type(getattr(obj, att_name))
                 c_value = att_type(att_value)
                 setattr(obj, att_name, c_value)
                 obj.save()
+            else:
+                setattr(obj, att_name, att_value)
+                storage.save()
             return
 
     def default(self, arg):
