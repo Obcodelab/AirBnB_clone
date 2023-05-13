@@ -184,7 +184,7 @@ class HBNBCommand(cmd.Cmd):
         elif line[1].startswith("update"):
             d_line = line[1].split('("')
             d_line[1] = d_line[1].replace('")', "")
-            self.do_update(f"{line[0]} {d_line[1]}")
+            self.do_update(f"{line[0]} {d_line[1]} {line[2]} {line[3]}")
 
 
 if __name__ == "__main__":
