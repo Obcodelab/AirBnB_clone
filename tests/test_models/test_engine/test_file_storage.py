@@ -17,6 +17,13 @@ class test_fileStorage(unittest.TestCase):
         obj = FileStorage()
         self.assertIsInstance(obj, FileStorage)
 
+    def test_docs(self):
+        """Tests docstrings"""
+        self.assertIsNotNone(FileStorage.all)
+        self.assertIsNotNone(FileStorage.new)
+        self.assertIsNotNone(FileStorage.save)
+        self.assertIsNotNone(FileStorage.reload)
+
     def test_all(self):
         """
         Tests method: all (returns dictionary <class>.<id> : <obj instance>)
