@@ -158,6 +158,8 @@ class HBNBCommand(cmd.Cmd):
             is not recognized.
             Retrieve all instances of a class by using: <class name>.all()
             Retrieve the number of instances of a class: <class name>.count()
+            Retrieve an instance based on its ID: <class name>.show(<id>)
+            Destroy an instance based on his ID: <class name>.destroy(<id>)
         """
 
         obj = storage.all()
