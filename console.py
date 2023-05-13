@@ -172,6 +172,14 @@ class HBNBCommand(cmd.Cmd):
                 if key[0] == line[0]:
                     count += 1
             print(count)
+        elif line[1].startswith("show"):
+            d_line = line[1].split('("')
+            d_line[1] = d_line[1].replace('")', '')
+            self.do_show(f"{line[0]} {d_line[1]}")
+        elif line[1].startswith("destroy"):
+            d_line = line[1].split('("')
+            d_line[1] = d_line[1].replace('")', '')
+            self.do_destroy(f"{line[0]} {d_line[1]}")
 
 
 if __name__ == '__main__':
