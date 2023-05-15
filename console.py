@@ -161,6 +161,8 @@ class HBNBCommand(cmd.Cmd):
             Retrieve the number of instances of a class: <class name>.count()
             Retrieve an instance based on its ID: <class name>.show(<id>)
             Destroy an instance based on his ID: <class name>.destroy(<id>)
+            Update an instance based on his ID:
+            <class name>.update(<id>, <attribute name>, <attribute value>)
         """
 
         obj = storage.all()
@@ -185,8 +187,9 @@ class HBNBCommand(cmd.Cmd):
             self.do_destroy(f"{line[0]} {d_line[1]}")
         elif line[1].startswith("update"):
             d_line = line[1].split('("')
-            d_line[1] = d_line[1].replace('")', "")
-            self.do_update(f"{line[0]} {d_line[1]}")
+            args = d_line[1].split('", "')
+            args[2] = args[2].replace('")', '')
+            self.do_update(f"{line[0]} {args[0]} {args[1]} {args[2]}")
 
 
 if __name__ == "__main__":
