@@ -155,10 +155,12 @@ class HBNBCommand(cmd.Cmd):
             return
 
     def default(self, arg):
-        """Method called on an input line when the command prefix
-        is not recognized.
-        Retrieve all instances of a class by using: <class name>.all()
-        Retrieve the number of instances of a class: <class name>.count()
+        """ Method called on an input line when the command prefix
+            is not recognized.
+            Retrieve all instances of a class by using: <class name>.all()
+            Retrieve the number of instances of a class: <class name>.count()
+            Retrieve an instance based on its ID: <class name>.show(<id>)
+            Destroy an instance based on his ID: <class name>.destroy(<id>)
         """
 
         obj = storage.all()
