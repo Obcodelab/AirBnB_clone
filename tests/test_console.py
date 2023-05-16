@@ -7,6 +7,7 @@ from io import StringIO
 from unittest.mock import patch
 
 import console
+import tests
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City

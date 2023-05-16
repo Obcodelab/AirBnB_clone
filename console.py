@@ -155,14 +155,14 @@ class HBNBCommand(cmd.Cmd):
             return
 
     def default(self, arg):
-        """ Method called on an input line when the command prefix
-            is not recognized.
-            Retrieve all instances of a class by using: <class name>.all()
-            Retrieve the number of instances of a class: <class name>.count()
-            Retrieve an instance based on its ID: <class name>.show(<id>)
-            Destroy an instance based on his ID: <class name>.destroy(<id>)
-            Update an instance based on his ID:
-            <class name>.update(<id>, <attribute name>, <attribute value>)
+        """Method called on an input line when the command prefix
+        is not recognized.
+        Retrieve all instances of a class by using: <class name>.all()
+        Retrieve the number of instances of a class: <class name>.count()
+        Retrieve an instance based on its ID: <class name>.show(<id>)
+        Destroy an instance based on his ID: <class name>.destroy(<id>)
+        Update an instance based on his ID:
+        <class name>.update(<id>, <attribute name>, <attribute value>)
         """
 
         obj = storage.all()
@@ -188,7 +188,7 @@ class HBNBCommand(cmd.Cmd):
         elif line[1].startswith("update"):
             d_line = line[1].split('("')
             args = d_line[1].split('", "')
-            args[2] = args[2].replace('")', '')
+            args[2] = args[2].replace('")', "")
             self.do_update(f"{line[0]} {args[0]} {args[1]} {args[2]}")
 
 
